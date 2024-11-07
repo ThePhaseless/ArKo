@@ -16,7 +16,10 @@ print_loop:
     inc si
 
     mov dl, [si]
-    cmp dl, 'c'
+    cmp dl, skip1
+    je print_loop
+
+    cmp dl, skip2
     je print_loop
 
     cmp dl, '$'
@@ -34,4 +37,5 @@ end:
 
 section .data
     text db "abbacadaddac$"
-    skip db 'c'
+    skip1 db 'c'
+    skip2 db 'd'
