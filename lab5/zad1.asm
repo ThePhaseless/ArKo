@@ -9,22 +9,22 @@ start:
 
 	jmp inputchar
 
-	inputchar:
-		mov ah, 8 ; Pobranie znaku bez wypisania go
-		int 21h
+inputchar:
+	mov ah, 8 ; Pobranie znaku bez wypisania go
+	int 21h
 
-		cmp al, "$"
-		jne outputchar
+	cmp al, "$"
+	je end
 
-		jmp end
+	jmp outputchar
 
-	outputchar:
-		mov dl, al
-		mov ah, 2 ; Wyświetlenie znaku
-		int 21h
+outputchar:
+	mov dl, al
+	mov ah, 2 ; Wyświetlenie znaku
+	int 21h
 
-		jmp inputchar
+	jmp inputchar
 
-	end:
-		mov ah, 4Ch
-		int 21h
+end:
+	mov ah, 4Ch
+	int 21h
