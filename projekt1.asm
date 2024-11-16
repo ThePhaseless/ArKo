@@ -16,20 +16,22 @@ start:
 	xor bx,bx
 	xor cx,cx
 	xor dx,dx
+	mov bp,sp
 
-	jmp increase_input
+	call new_line
+	call input_msg
+	jmp input
 
 
-
-prnt_new_line:
+new_line:
 	push ax
 	mov ah, 9
-	mov dx, new_line
+	mov dx, new_line_str
 	int 21h
 	pop ax
 	ret
 
-input:
+input_char:
 	mov ah, 1
 	int 21h
 	ret
@@ -42,7 +44,7 @@ input_msg:
 	pop ax
 	ret
 
-output:
+output_char:
 	push ax
 	mov ah, 2
 	int 21h
@@ -57,40 +59,39 @@ output_msg:
 	pop ax
 	ret
 
-increase_input:
-	call input_msg
-	call input
-	; mov al, '4'
-
-	call prnt_new_line
-
-	cmp al, ' '
-	je end
-
-	call output_msg
-
-	add al, 2
+input:
+	call input_char
 
 	xor ah, ah
-	mov dx, ax
+	push ax
+	inc	cx
 
-	call output
+	cmp al, ' '
+	jne input
 
-	call prnt_new_line
+	cmp cx, 1
+	je start
 
-	jmp increase_input
+	dec cx ; remove
+	call new_line
+	call output_msg
 
-end:
-	mov ah, 9
-	mov dx, end_str
-	int 21h
+	jmp output
 
-	call prnt_new_line
-	mov ah, 4Ch
-	int 21h
+output:
+	mov dx , [bp-2]
+
+	sub bp, 2 ; get next char
+
+	add dx, 2
+	call output_char
+
+	loop output
+
+	jmp start
 
 section .data
-	input_str db "Input: $"
-	new_line db 10, 13, "$"
+	input_str db "Input:  $"
+	new_line_str db 10, 13, "$"
 	output_str db "Output: $"
 	end_str db "Pressed Space, exiting...$"
