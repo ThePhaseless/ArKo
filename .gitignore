@@ -1,3 +1,13 @@
 **/*.com
 **/*.lst
 **/*.zip
+
+# Ignore binary files
+*
+!/**/
+!*.*
+
+# build output
+*.o
+*.a
+*.obj
