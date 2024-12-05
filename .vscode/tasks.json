@@ -1,0 +1,50 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "assemble nasm",
+            "type": "shell",
+            "command": "nasm",
+            "args": [
+                "-f",
+                "elf32",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}.o"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "link nasm and c",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-m32",
+                "-o",
+                "${fileDirname}/main",
+                "${fileDirname}/main.c",
+                "${fileDirname}/sum.o",
+                "-L.",
+                "-lsum"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "link shared library",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-m32",
+                "-shared",
+                "-o",
+                "libsum.so",
+                "${fileDirname}/sum.o"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
