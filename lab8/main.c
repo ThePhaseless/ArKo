@@ -28,8 +28,8 @@ int main()
 	printf("Input string: ");
 	scanf("%s", str);
 
-	len = count_len(str);
-	printf("Before: %s", str);
+	len = count_chars(str);
+	printf("Before: %s len: %d", str, len);
 	print_line();
 
 	process_string(str, len);

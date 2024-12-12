@@ -5,5 +5,5 @@ count_chars:
 	; Arguments:
 	; str: [esp + 4]
 
-	mov eax, 32
+	mov eax, 30
 	ret
