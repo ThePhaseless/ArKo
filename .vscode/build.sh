@@ -2,7 +2,7 @@
 
 # Check if a directory argument is provided
 if [ -z "$1" ]; then
-    echo "Usage: $0 <directory>"
+    echo "Usage: $0 <directory> <filename>"
     exit 1
 fi
 
@@ -33,10 +33,10 @@ for ASM_FILE in *.asm; do
 done
 
 # Compile the C program and link it with the static library
-C_FILE="main.c"
+C_FILE="$1"
 if [ -f "$C_FILE" ]; then
     echo "Compiling $C_FILE"
-    gcc -m32 -o main.o -c ${C_FILE}
+    gcc -g -m32 -o main.o -c ${C_FILE}
     if [ $? -ne 0 ]; then
         echo "Error compiling $C_FILE"
         exit 1
@@ -52,11 +52,10 @@ ASM_FILES=$(ls *.obj)
 ASM_FILES=$(echo $ASM_FILES | tr '\n' ' ')
 echo "ASM_FILES: $ASM_FILES"
 
-gcc -m32 $ASM_FILES main.o -o main -lc
+gcc -m32 $ASM_FILES main.o -o main -lc -g
 if [ $? -ne 0 ]; then
     echo "Error linking object files"
     exit 1
 fi
 
-echo "Build successful. Executable 'main' created. Running..."
-./main
+echo "Build successful."
