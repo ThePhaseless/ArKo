@@ -8,7 +8,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"doinkythederp.nasm-language-support"
+				"doinkythederp.nasm-language-support",
+				"llvm-vs-code-extensions.vscode-clangd"
 			]
 		}
 	}

@@ -23,7 +23,7 @@ for ASM_FILE in *.asm; do
     if [ -f "$ASM_FILE" ]; then
         OBJ_FILE="${ASM_FILE%.asm}.obj"
         echo "Assembling $ASM_FILE to $OBJ_FILE"
-        nasm -f elf32 "$ASM_FILE" -o "$OBJ_FILE"
+        nasm -g -f elf32 "$ASM_FILE" -o "$OBJ_FILE"
         # gcc -m32 interface.c file1.obj file2.obj -o program
                 if [ $? -ne 0 ]; then
             echo "Error assembling $ASM_FILE"
@@ -33,7 +33,7 @@ for ASM_FILE in *.asm; do
 done
 
 # Compile the C program and link it with the static library
-C_FILE="$1"
+C_FILE="$2"
 if [ -f "$C_FILE" ]; then
     echo "Compiling $C_FILE"
     gcc -g -m32 -o main.o -c ${C_FILE}

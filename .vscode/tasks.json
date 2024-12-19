@@ -7,13 +7,15 @@
             "command": ".vscode/build.sh",
             "args": [
                 "${fileDirname}",
-                "${fileBasename}"
+                "${file}"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "problemMatcher": []
+            "problemMatcher": [
+                "$gcc"
+            ]
         },
     ]
 }
