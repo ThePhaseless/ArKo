@@ -1,5 +1,16 @@
 #include <stdio.h>
 
+// Każdy projekt powinien posiadać interfejs napisany
+// w języku C (wprowadzanie danych z klawiatury, wypisywanie
+// ich na ekran, nieskończona pętla programu itp.) oraz mieć
+// logikę biznesową napisaną w asemblerze z wykorzystaniem
+// FPU. Dodatkowo, każdy projekt powinien móc przyjąć
+// dodatkowy argument w postaci liczby miejsc po przecinku, do
+// której ma być zaokrąglony wynik. Liczbę tę podaje użytkownik
+// z klawiatury.
+// Napisać program, który oblicza e^x, gdzie x jest
+// argumentem podanym przez użytkownika.
+
 #define MAX_VAL(type) ((type)((1U << (sizeof(type) * 8 - 1)) - 1))
 
 void clearInvalidInput() {
