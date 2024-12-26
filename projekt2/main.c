@@ -35,7 +35,7 @@ int main() {
       printf("Couldn't parse accuracy!\n");
       clearInvalidInput();
       continue;
-    } else if (accuracy < 0 || accuracy >= MAX_VAL(unsigned int)) {
+    } else if (accuracy < 0 || accuracy > MAX_VAL(unsigned int)) {
       printf("Accuracy must be greater than 0 and less than %d\n",
              MAX_VAL(unsigned int));
       continue;
