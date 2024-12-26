@@ -23,10 +23,10 @@ extern float exp_asm(float x, int accuracy);
 int main() {
   printf("Exponential calculator");
   do {
-    float x;
+    long double x;
     unsigned int accuracy, isInputValid;
     printf("\nExponent: ");
-    isInputValid = scanf("%f", &x);
+    isInputValid = scanf("%Lf", &x);
 
     if (isInputValid == 0) {
       printf("Couldn't parse x!\n");
@@ -53,7 +53,7 @@ int main() {
     }
 
     float result = exp_asm(x, accuracy);
-    printf("e^x = ~%f\n", result);
+    printf("e^x = ~%.*f\n", accuracy, result);
 
     printf("Continue? (y/n) ");
     char c;
