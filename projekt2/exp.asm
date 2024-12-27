@@ -1,4 +1,3 @@
-section .text
 
 global exp_asm
 global silnia
@@ -14,7 +13,7 @@ exp_asm:
     mov ecx, n
 
     finit ; Init FPU
-    fld1 ; push 0 (initial return value)
+    fld1 ; push 1 (initial return value)
 
     jmp exp_loop
 

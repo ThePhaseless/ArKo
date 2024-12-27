@@ -18,7 +18,7 @@ void clearInvalidInput() {
     ;
 }
 
-extern float exp_asm(float x, int accuracy);
+extern float exp_asm(float x, int accuracy) asm ("exp_asm"); // Explicitly tell GCC name of the asm function to use
 
 int main() {
   printf("Exponential calculator");
