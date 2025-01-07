@@ -12,6 +12,7 @@
 // argumentem podanym przez użytkownika.
 
 #define MAX_VAL(type) ((type)((1U << (sizeof(type) * 8 - 1)) - 1))
+#define MIN_VAL(type) ((type)(1U << (sizeof(type) * 8 - 1)))
 
 void clearInvalidInput() {
   while (getchar() != '\n')
@@ -32,7 +33,7 @@ int main() {
       printf("Couldn't parse x!\n");
       clearInvalidInput();
       continue;
-    } else if (x < 0 || x > MAX_VAL(float)) {
+    } else if (x < MIN_VAL(float) || x > MAX_VAL(float)) {
       printf("Value of x must be greater than 0 and less than %f\n",
              MAX_VAL(float));
       continue;
