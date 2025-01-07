@@ -11,17 +11,18 @@
 // Napisać program, który oblicza e^x, gdzie x jest
 // argumentem podanym przez użytkownika.
 
-#define MAX_VAL(type) ((type)((1U << (sizeof(type) * 8 - 1)) - 1))
-#define MIN_VAL(type) ((type)(1U << (sizeof(type) * 8 - 1)))
-
 void clearInvalidInput() {
   while (getchar() != '\n')
     ;
 }
 
-extern float exp_asm(float x, int accuracy) asm ("exp_asm"); // Explicitly tell GCC name of the asm function to use
+extern float exp_asm(float x, int accuracy) asm(
+    "exp_asm"); // Explicitly tell GCC name of the asm function to use
 
 int main() {
+  const float FLT_MAX = 3.40282347e+38F;              // Taken from lib
+  const unsigned int UINT_MAX = 2147483647 * 2U + 1U; // Taken from lib
+
   printf("Exponential calculator");
   do {
     long double x;
@@ -33,9 +34,9 @@ int main() {
       printf("Couldn't parse x!\n");
       clearInvalidInput();
       continue;
-    } else if (x < MIN_VAL(float) || x > MAX_VAL(float)) {
-      printf("Value of x must be greater than 0 and less than %f\n",
-             MAX_VAL(float));
+    } else if (x < -FLT_MAX || x > FLT_MAX) {
+      printf("Value of x must be greater than %f and less than %f\n", -FLT_MAX,
+             FLT_MAX);
       continue;
     }
 
@@ -47,9 +48,8 @@ int main() {
       printf("Couldn't parse accuracy!\n");
       clearInvalidInput();
       continue;
-    } else if (accuracy < 0 || accuracy > MAX_VAL(unsigned int)) {
-      printf("Accuracy must be greater than 0 and less than %d\n",
-             MAX_VAL(unsigned int));
+    } else if (accuracy < 0 || accuracy > UINT_MAX) {
+      printf("Accuracy must be greater than 0 and less than %d\n", UINT_MAX);
       continue;
     }
 
