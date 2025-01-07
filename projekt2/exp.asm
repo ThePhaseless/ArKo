@@ -4,7 +4,8 @@ global silnia
 global power
 
 %idefine x [ebp + 8] ; float is 2 byte
-%idefine n [ebp + 12] ; int is 1 byte
+; %idefine n [ebp + 12] ; int is 1 byte
+%idefine n 20
 
 exp_asm:
 	push ebp
